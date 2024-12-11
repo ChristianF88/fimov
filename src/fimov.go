@@ -13,9 +13,9 @@ package main
 // }
 // The cli should parse the main keywords of the config file and should accept the keywords and use corresping source and destination.
 // Examples:
-// imgorg camera --start 2020-01-01 --end 2020-12-31 --name folder-name
-// imgorg whatsapp --start 2020-01-01 --name folder-name  # if end is not passed end == now
-// imgorg camera --start 2020-01-01 # if name is not passed name == start_end
+// fimov camera --start 2020-01-01 --end 2020-12-31 --name folder-name
+// fimov whatsapp --start 2020-01-01 --name folder-name  # if end is not passed end == now
+// fimov camera --start 2020-01-01 # if name is not passed name == start_end
 
 import (
 	"encoding/json"
@@ -34,11 +34,11 @@ type PathConfig struct {
 func main() {
 	start, end, name, keyword := parseCLIArgs()
 	if keyword == "" {
-		fmt.Println("Usage: imgorg <keyword> --start <start-date> [--end <end-date>] [--name <folder-name>]")
+		fmt.Println("Usage: fimov <keyword> --start <start-date> [--end <end-date>] [--name <folder-name>]")
 		return
 	}
 
-	config, err := readConfig(".imgorg.json")
+	config, err := readConfig(".fimov.json")
 	if err != nil {
 		fmt.Println("Error reading configuration file:", err)
 		return
@@ -102,7 +102,7 @@ func parseCLIArgs() (string, string, string, string) {
 
 	if len(os.Args) < 2 {
 		fmt.Println("Error: keyword is required")
-		fmt.Println("Usage: imgorg <keyword> --start <start-date> [--end <end-date>] [--name <folder-name>]")
+		fmt.Println("Usage: fimov <keyword> --start <start-date> [--end <end-date>] [--name <folder-name>]")
 		os.Exit(1)
 	}
 
@@ -127,7 +127,7 @@ func parseCLIArgs() (string, string, string, string) {
 		return *startWhatsApp, *endWhatsApp, *nameWhatsApp, keyword
 	default:
 		fmt.Println("Error: unknown keyword", keyword)
-		fmt.Println("Usage: imgorg <keyword> --start <start-date> [--end <end-date>] [--name <folder-name>]")
+		fmt.Println("Usage: fimov <keyword> --start <start-date> [--end <end-date>] [--name <folder-name>]")
 		os.Exit(1)
 	}
 
