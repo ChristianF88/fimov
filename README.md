@@ -2,6 +2,6 @@
 
 build:
 ```bash
-cd fimov/src && go build -o fimov && mv fimov ../ && cd ..
+cd fimov/src && GOARCH=arm64 GOOS=linux go build -o fimov && mv fimov ../ && cd ..
 ```
 
